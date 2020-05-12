@@ -1,0 +1,45 @@
+<!-- Masthead -->
+<header class="masthead bg-primary text-white text-center">
+	<div class="container d-flex align-items-center flex-column">
+		<!-- Masthead Heading -->
+		<h1 class="masthead-heading text-uppercase mb-0"> Fiche </h1>
+	</div>
+</header>
+<!-- Portfolio Section -->
+<section class="page-section portfolio" id="portfolio">
+	<div class="container">
+		<!-- Portfolio Section Heading -->
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Evenement :  <%= "#{@event.title}" %> </p></h2>
+		<!-- Icon Divider -->
+		<div class="divider-custom">
+		        <div class="divider-custom-line"></div>
+	        <div class="divider-custom-icon">
+        		<i class="fas fa-star"></i>
+	        </div>
+        		<div class="divider-custom-line"></div>
+      </div>
+
+
+	<div class="jumbotron">
+		<p class="lead"> Description de l'événement : <%= @event.description %></p>
+		<hr class="my-4">
+			<p>Cet événement a été crée par <%= "#{@event.admin.first_name},(#{@event.admin.email}) " %>, et se deroulera du <%= "#{@event.start_date} au #{@event.end_date} "  %> </p>
+		</hr>
+		<hr class="my-4">
+			<p> Il y a <%= @participants.count %> participants a cet evenement. L'evenement se deroulera à <%= @event.location %>. </p>
+
+			<% if current_user.id == @event.admin.id %>
+				<a class="btn btn-secondary btn-lg" href="<%= edit_event_path(@event.id) %>" role="button">Modifier l'événement</a>
+	   			<a class="btn btn-danger btn-lg" href="<%= event_path(@event.id) %>" role="button" data-confirm="Attention la suppression est irreversible" data-method="DELETE">Supprimer l'événement</a>
+			<%else%>
+              	<% if !@participants.include?(current_user) %>
+					<%= form_for :attendance, url: event_attendances_path(@event) do |f| %>
+			        	<button class="btn btn-success btn-lg">  Participer pour <%="#{@event.price}$" %> </button>
+			        <%end%>
+				<%else%>
+					<a class="btn br3 bg-orange9 ph4 pv3 lh0 bt bl bw2 b--black-20 white tc" href="<%= event_attendance_path(@event.id) %>" role="button" data-method="DELETE"> Ne plus participer</a>
+				<%end%>
+			<%end%>
+		</hr>
+	</div>
+</section>

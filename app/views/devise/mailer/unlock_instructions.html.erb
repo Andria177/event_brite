@@ -1,0 +1,7 @@
+<p>Bonjour/Salama <%= @resource.email %>!</p>
+
+<p>Votre compte a été à cause d'un nombre important de requête aui n'a pas abouti.</p>
+
+<p>Si vous voulez l'activer, il faudra cliquer sur le lien suivant:</p>
+
+<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>

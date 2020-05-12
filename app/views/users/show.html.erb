@@ -1,0 +1,112 @@
+<% if @user.id == current_user.id %>
+	<!-- Masthead -->
+	<header class="masthead bg-primary text-white text-center">
+		<div class="container d-flex align-items-center flex-column">
+			<!-- Masthead Heading -->
+			<h1 class="masthead-heading text-uppercase mb-0"> Mon compte</h1>
+		</div>
+	</header>
+
+	<!-- Portfolio Section -->
+	<section class="page-section portfolio" id="portfolio">
+		<div class="container">
+			<!-- Portfolio Section Heading -->
+			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"> Bienvenue :  <%= "#{@user.first_name}" %> </p></h2>
+			<!-- Icon Divider -->
+			<div class="divider-custom">
+				<div class="divider-custom-line"></div>
+				<div class="divider-custom-icon">
+        			<i class="fas fa-star"></i>
+				</div>
+				<div class="divider-custom-line"></div>
+			</div>
+			<div class="row">
+				<div class="col-8">
+				<div class="row">
+					 <h3> Voici les evenements dont je suis l'administrateur </h3>
+
+				        <% @events_admin.each do |event| %>
+		     			 <div class="card m-2" style="width: 16rem;">
+			    			<div class="card-body">
+				  			 	<h5 class="card-title"> <%= event.title %></h5>
+  				  				<h6 class="card-subtitle mb-2 text-muted">Auteur : <%= event.admin.first_name %></h6>
+              					 <%= link_to "Afficher le detail de l'evenement", event_path(event.id) %>
+			     			</div>
+  		   				 </div>
+	    				  <% end %>
+			      </div>
+			</div>
+  			<div class="col-4">
+		      		<div class="jumbotron">
+					<img class="masthead-avatar mb-5" src="/images/avatar.svg" alt="">
+					<p class="lead"><%= "#{@user.first_name} #{@user.last_name} " %></p>
+			        <hr class="my-4">
+        	         	<p> <%= @user.description %></p>
+					</hr>
+	                <hr class="my-4">
+						<p> Contact <%= @user.email %> </p>
+					</hr>
+					<hr>
+	                	<a class="btn btn-primary btn-lg" href="<%= edit_user_path(@user.id) %>" role="button">Modifier ma description</a>
+						<a class="btn btn-danger btn-lg mt-3" href="<%= edit_user_registration_path(@user.id) %>" role="button">Modifier mes informations privées </a>
+					</hr>
+
+				</div>
+			</div>
+		</div>
+</section>
+
+<%else%>
+
+<!-- Masthead -->
+<header class="masthead bg-primary text-white text-center">
+	<div class="container d-flex align-items-center flex-column">
+		<!-- Masthead Heading -->
+		<h1 class="masthead-heading text-uppercase mb-0"> Fiche Organisateur</h1>
+	</div>
+</header>
+
+<!-- Portfolio Section -->
+<section class="page-section portfolio" id="portfolio">
+	<div class="container">
+		<!-- Portfolio Section Heading -->
+		<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"> Organisateur :  <%= "#{@user.first_name}" %> </p></h2>
+		<!-- Icon Divider -->
+		<div class="divider-custom">
+			<div class="divider-custom-line"></div>
+		<div class="divider-custom-icon">
+        		<i class="fas fa-star"></i>
+		</div>
+			<div class="divider-custom-line"></div>
+		</div>
+		<div class="row">
+			<div class="col-8">
+				<div class="row">
+				        <% @events_admin.each do |event| %>
+		     			 <div class="card m-2" style="width: 16rem;">
+			    			<div class="card-body">
+				  			 	<h5 class="card-title"> <%= event.title %></h5>
+  				  				<h6 class="card-subtitle mb-2 text-muted">Auteur : <%= event.admin.first_name %></h6>
+              					 <%= link_to "Afficher le detail de l'evenement", event_path(event.id) %>
+			     			</div>
+  		   				 </div>
+	    				  <% end %>
+			      </div>
+			</div>
+  			<div class="col-4">
+		      		<div class="jumbotron">
+					<img class="masthead-avatar mb-5" src="/images/avatar.svg" alt="">
+					<p class="lead"><%= "#{@user.first_name} #{@user.last_name} " %></p>
+			                <hr class="my-4">
+        	        	        	<p> <%= @user.description %></p>
+
+					</hr>
+	                                <hr class="my-4">
+					<p> Contact <%= @user.email %> </p>
+					</hr>
+				</div>
+			</div>
+		</div>
+</section>
+
+<%end%>

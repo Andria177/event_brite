@@ -1,0 +1,43 @@
+
+<div class="body-blue">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5 border-blue">
+          <div class="card-body">
+            <%= form_for @user do |f| %>
+              <% if @user.errors.any? %>
+                <div class="alert alert-danger">
+                    <div id="error_explanation">
+                        <p> <%= pluralize(@user.errors.count, "error") %> Impossible à sauvegarder:</p>   
+                            <ul>
+                                <% @user.errors.full_messages.each do |message| %>
+                                    <li><%= message %></li>
+                                <% end %>
+                            </ul>
+                    </div>
+                </div>
+              <% end %>
+              <h1 class="h3 mb-3 font-weight-normal text-center"> Modifier mes informations </h1>
+              <div class="form-group">
+                <%= f.label :first_name, "Prenom" %><br />
+                <%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :last_name, "Nom" %><br />
+                <%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :description, "Description" %><br />
+                <%= f.text_field :description, autocomplete: "description", class: "form-control" %>
+              </div>
+              <div class="actions mt-5 mb-4">
+                <%= f.submit "Modifier mes informations", class:"btn btn-md btn-primary btn-block text-uppercase" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
